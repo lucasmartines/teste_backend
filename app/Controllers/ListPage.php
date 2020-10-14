@@ -72,9 +72,10 @@ class ListPage extends BaseController
 	
 				session()->setFlashdata("saved_item_message","Usuario foi salvo com sucesso");
 			}
-			echo view ("templates/header");
-			echo view("pages/list/list" ,$data );
-			return;
+			// echo view ("templates/header");
+			// echo view("pages/list/list" ,$data );
+
+			return redirect()->to("/list");
 		}
 
 		echo view ("templates/header");
