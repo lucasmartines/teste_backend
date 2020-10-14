@@ -10,9 +10,16 @@
 			<div class="alert alert-success">	
 				<?php echo session()->getFlashdata("updated_item_message") ;?>
 			</div>
-		<?php endif?>
-
+        <?php endif?>
+        
+        <?php if( isset( $validation) ): ?>
+            <div class="alert alert-danger">	
+				<?php echo $validation->listErrors() ?>
+			</div>
+        <?php endif ?>
+            
         <div class="row">
+
             <div class="form-group col-md-4">
                 <label for="nome">Nome</label>
 				<input 
@@ -63,5 +70,7 @@
 
  <script src="<?php echo site_url() ?>js/jquery.min.js"></script>
  <script src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
+ <script src="<?php echo site_url() ?>js/main.js"></script>
+ 
 </body>
 </html>

@@ -29,7 +29,6 @@ $routes->setAutoRoute(true);
  */
 
 
-$routes->get("/",'UserPage::index');
 
 
 
@@ -40,23 +39,37 @@ $routes->get("/",'UserPage::index');
  */
 
 
+$routes->match(["get"],"/",'UserPage::index',["filter"=>"no_auth"]);
+$routes->match(["get","post"],"/user",'UserPage::index' , ["filter"=>"no_auth"]);
+
+
+$routes->match(["post"],"/user/logoff",'UserPage::logoff');
+
+
+/**
+ * --------------------------------------------------------------------
+ * LIST ITEMS
+ * --------------------------------------------------------------------
+ */
+
+
 # list all 
-$routes->get("/list/search",'ListPage::search');
-$routes->get("/list",'ListPage::index');
+$routes->get("/list/search",'ListPage::search' , ["filter" => "auth"]);
+$routes->get("/list",'ListPage::index',["filter" => "auth"]);
 
 
 # edit one
-$routes->match(["get","post"] , "/list/(:segment)/edit","ListPage::modifyView/$1");
+$routes->match(["get","post"] , "/list/(:segment)/edit","ListPage::modifyView/$1",["filter" => "auth"]);
 
 # create one
-$routes->match(["get","post"] , "/list/create","ListPage::createView");
+$routes->match(["get","post"] , "/list/create","ListPage::createView",["filter" => "auth"]);
 
 
 
 # view one
-$routes->match(["get"] , "/list/(:segment)","ListPage::viewOne/$1");
+$routes->match(["get"] , "/list/(:segment)","ListPage::viewOne/$1",["filter" => "auth"]);
 # delete one
-$routes->match(["post"] , "/list/(:segment)/delete","ListPage::delete/$1");
+$routes->match(["post"] , "/list/(:segment)/delete","ListPage::delete/$1",["filter" => "auth"]);
 
 
 

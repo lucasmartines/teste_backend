@@ -16,7 +16,10 @@ class ListPage extends BaseController
 	public function search(  )
 	{
 
-		 
+		if(! $this->request->getVar("search") ) {
+			return redirect()->to("/list");
+		}
+
 
 		$list = new User();
 		
@@ -26,8 +29,8 @@ class ListPage extends BaseController
 		];
 		
 
-		 echo view ("templates/header");
-		 return view("pages/list/list" , $data );
+		echo view ("templates/header");
+		return view("pages/list/list" , $data );
 	}
 
 
@@ -54,20 +57,29 @@ class ListPage extends BaseController
     public function createView(  )
 	{
 
-		if( $this->request->getMethod() === "post" &&
-			$this->validate( $this->validateRules() ) )
+		$data = [];
+
+		if( $this->request->getMethod() === "post" )
 		{
+			if(!$this->validate( $this->validateRulesCreateUser() )){
+				$data["validation"] = $this->validator;
+			}else
+			{
+				$data = $this->getRequestData();		 
 
-			$data = $this->getRequestData();		 
-
-			$userModel = new User();
-			$userModel->save( $data );
-
-			session()->setFlashdata("saved_item_message","Usuario foi salvo com sucesso");
+				$userModel = new User();
+				$userModel->save( $data );
+	
+				session()->setFlashdata("saved_item_message","Usuario foi salvo com sucesso");
+			}
+			echo view ("templates/header");
+			echo view("pages/list/list" ,$data );
+			return;
 		}
 
 		echo view ("templates/header");
-		return view("pages/list/add");
+		echo view("pages/list/add" ,$data );
+		
     }
     
     /* for someone item that exists */
@@ -76,42 +88,40 @@ class ListPage extends BaseController
 		$userModel = new User();
 		$myUser = $userModel->getUser($id);
 
-		
-		// FOR UPDATING USER
-		if( $this->request->getMethod() === "post" &&
-			$this->validate( $this->validateRules() ) )
-		{
-			//echo var_dump( $this->getRequestData() );
+		$data = [];
 
-			$request_data = $this->getRequestData();
+		if( $this->request->getMethod() === "post" )		
+		{
+			if(!$this->validate( $this->validateRulesUpdateUser() )){
+				$data["validation"] = $this->validator;
+			}
+			else
+			{
+				$request_data = $this->getRequestData();
 			
-			$request_data["id"] = $id;
-			$userModel->save( $request_data );
+				$request_data["id"] = $id;
+				$userModel->save( $request_data );
+	
+				// gett Updated user
+				$myUser = $userModel->getUser($id);
 
-			session()->setFlashdata("updated_item_message","Usuario foi atualizado com sucesso");
-
-
-			return redirect()->to("/list/".$id."/edit");
-			//return view("pages/list/view");
+				session()->setFlashdata("updated_item_message","Usuario foi atualizado com sucesso");
+			}
 		}
-		// FOR VIEWING USER
-		else
+		
+
+		if($myUser)
 		{
+			$data["user"] = $myUser ;	
+	
+			echo view ("templates/header");
+			return view("pages/list/edit" , $data );
 
-			if($myUser){
-				$data = [
-					"user" => $myUser
-				];	
-		
-				echo view ("templates/header");
-		
-				return view("pages/list/edit" , $data );
-
-			}
-			else{
-				return "User Not Found";
-			}
 		}
+		else{
+			return "User Not Found";
+		}
+	
     }
 
     public function viewOne( $id  )
@@ -136,12 +146,21 @@ class ListPage extends BaseController
 		return redirect()->to("/list");
 	}
 
-	private function validateRules(){
+	private function validateRulesCreateUser(){
 		return [
-			'nome' => 'required|min_length[3]|max_length[255]',
+			'nome' => 'required|min_length[5]|max_length[254]',
 			'sobre_nome'  => 'required',
 			'nascimento'  => 'required',
-			'email'  => 'required',
+			'email'  => 'required|valid_email|is_unique[user.email]',
+		];
+	}
+
+	private function validateRulesUpdateUser(){
+		return [
+			'nome' => 'required|min_length[5]|max_length[254]',
+			'sobre_nome'  => 'required',
+			'nascimento'  => 'required',
+			'email'  => 'required|valid_email',
 		];
 	}
 	private function getRequestData(){

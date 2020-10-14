@@ -30,6 +30,17 @@
 				</div>
 			</div>
 		</div>
+	<?php endif?>
+	
+	
+    <?php if(  session()->getFlashdata("saved_item_message" )  ):?>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="alert alert-success">
+					<?php echo session()->getFlashdata("saved_item_message") ;?>
+				</div>
+			</div>
+		</div>
     <?php endif?>
 
 
@@ -56,7 +67,10 @@
                         <td><?php echo  $user_item['id'] ?></td>
                         <td><?php echo  $user_item['nome']  ?></td>
                         <td><?php echo  $user_item['sobre_nome']  ?></td>
-                        <td><?php echo  $user_item['nascimento']  ?></td>
+                        <td>
+                            <?php $date = new DateTime(  $user_item['nascimento'] ); ?>
+                            <?php echo $date->format("d/m/Y")   ?>
+                        </td>
                         <td><?php echo  $user_item['email']  ?></td>
                         <td class="actions">
 
@@ -126,6 +140,8 @@
     <script src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
 
     <script src="<?php echo site_url() ?>js/user/delete.js?>"> </script>
+    <script src="<?php echo site_url() ?>js/main.js"></script>
+    
 
     </body>
 

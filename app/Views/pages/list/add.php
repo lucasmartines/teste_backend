@@ -10,10 +10,16 @@
 			</div>
 		<?php endif?>
 
+        <?php if( isset( $validation) ): ?>
+            <div class="alert alert-danger">	
+				<?php echo $validation->listErrors() ?>
+			</div>
+        <?php endif ?>
+        
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nome">Nome</label>
-                <input name="nome" type="text" class="form-control" id="nome" placeholder="Digite o valor">
+                <input required  name="nome" type="text" class="form-control" id="nome" placeholder="Digite o valor">
             </div>
         </div>
 
@@ -29,14 +35,14 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nascimento">Nascimento</label>
-                <input name="nascimento" type="date" class="form-control" id="nascimento" placeholder="Digite o valor">
+                <input required name="nascimento" type="date" class="form-control" id="nascimento" placeholder="Digite o valor">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-3">
                 <label for="email">E-Mail</label>
-                <input name="email" type="email" class="form-control" id="email" placeholder="Digite o valor">
+                <input required name="email" type="email" class="form-control" id="email" placeholder="Digite o valor">
             </div>
         </div>
 
@@ -55,6 +61,7 @@
 
 <script src="<?php echo site_url() ?>js/jquery.min.js"></script>
 <script src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
+<script src="<?php echo site_url() ?>js/main.js"></script>
 </body>
 
 </html>

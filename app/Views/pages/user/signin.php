@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,25 +30,43 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
     <div class="container">
 
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+
+        <form class="form-signin" action="<?php echo site_url() ?>user" method="post">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            
+            <?php if( isset( $validation) ): ?>
+              <div class="alert alert-danger">
+                  <?php echo $validation->listErrors() ?>
+              </div>
+            <?php endif ?>
+
+            <?php if(  session()->getFlashdata("user_dont_exists_message" )  ):?>
+                       
+                <div class="alert alert-danger">
+                    <?php echo session()->getFlashdata("user_deleted_success") ;?>
+                </div>
+               
+            <?php endif?>
+
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required
+                autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input name="senha" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
 
     </div> <!-- /container -->
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<?php echo site_url() ?>assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+</body>
+
 </html>

@@ -13,8 +13,3 @@ $(".delete_button").click( function(e){
 
 })
 
-// $("#confirm_delete_buttn").click( function(e){
-
-    
-//     alert("kill")
-// })

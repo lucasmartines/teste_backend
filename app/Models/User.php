@@ -10,8 +10,10 @@ class User extends Model{
     protected $allowedFields = ['nome', 'sobre_nome', 'nascimento','email'];
 
 
+
     public function getUser( $id )
     {   
+        
         if($id)
         {
             return $this->asArray()->where(['id' => $id])->first();

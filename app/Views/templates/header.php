@@ -24,7 +24,14 @@
    </div>
    <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
-     <li><a href="<?php echo site_url() ?>list">Usuários</a></li>
+
+    <?php if(  session()->get('isLogged') ): ?>
+        <li><a href="<?php echo site_url() ?>list">Usuários</a></li>
+       
+        <!-- this logoff link has a script with ajax that redirect user -->
+        <li> <a id="logoff" href="<?php echo site_url() ?>list">Logoff</a></li>
+       
+    <?php endif ?>
      <!-- <li><a href="#">Opções</a></li>
      <li><a href="#">Perfil</a></li>
      <li><a href="#">Ajuda</a></li> -->
