@@ -1,15 +1,17 @@
 ﻿<div id="main" class="container-fluid" style="margin-top: 50px">
 
     <div id="top" class="row">
+
         <div class="col-sm-3">
             <h2>Itens</h2>
         </div>
+
         <div class="col-sm-6">
             <form action="<?php echo site_url() ?>list/search" action="GET">
                 <div class="input-group h2">
-                    <input name="search" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
+                    <input value="<?php if( isset( $search )){ echo $search; }?>" name="search" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-primary" type="submit"  >
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -44,6 +46,7 @@
     <?php endif?>
 
 
+   
     <hr />
     <div id="list" class="row">
 
@@ -61,30 +64,30 @@
                 </thead>
                 <tbody>
                     <?php if ( isset( $users ) ) : ?>
-                    <?php if (is_array($users) && !empty($users)) : ?>
-                    <?php foreach ($users as $user_item) : ?>
-                    <tr id="<?= $user_item['id'] ?>">
-                        <td><?php echo  $user_item['id'] ?></td>
-                        <td><?php echo  $user_item['nome']  ?></td>
-                        <td><?php echo  $user_item['sobre_nome']  ?></td>
-                        <td>
-                            <?php $date = new DateTime(  $user_item['nascimento'] ); ?>
-                            <?php echo $date->format("d/m/Y")   ?>
-                        </td>
-                        <td><?php echo  $user_item['email']  ?></td>
-                        <td class="actions">
+                        <?php if (is_array($users) && !empty($users)) : ?>
+                            <?php foreach ($users as $user_item) : ?>
+                                <tr id="<?= $user_item['id'] ?>">
+                                    <td><?php echo  $user_item['id'] ?></td>
+                                    <td><?php echo  $user_item['nome']  ?></td>
+                                    <td><?php echo  $user_item['sobre_nome']  ?></td>
+                                    <td>
+                                        <?php $date = new DateTime(  $user_item['nascimento'] ); ?>
+                                        <?php echo $date->format("d/m/Y")   ?>
+                                    </td>
+                                    <td><?php echo  $user_item['email']  ?></td>
+                                    <td class="actions">
 
-                            <a class="btn btn-success btn-xs" href="<?php echo site_url() ?>list">Visualizar</a>
-                            <a class="btn btn-warning btn-xs"
-                                href="<?php echo site_url() ?>list/<?php echo esc($user_item['id']) ?>/edit">Editar</a>
-                            <a data-delete_id="<?= $user_item['id'] ?>" class="btn btn-danger btn-xs delete_button"
-                                href="#" data-toggle="modal" data-target="#delete-modal">
-                                Excluir</a>
+                                        <a class="btn btn-success btn-xs" href="<?php echo site_url() ?>list">Visualizar</a>
+                                        <a class="btn btn-warning btn-xs"
+                                            href="<?php echo site_url() ?>list/<?php echo esc($user_item['id']) ?>/edit">Editar</a>
+                                        <a data-delete_id="<?= $user_item['id'] ?>" class="btn btn-danger btn-xs delete_button"
+                                            href="#" data-toggle="modal" data-target="#delete-modal">
+                                            Excluir</a>
 
-                        </td>
-                    </tr>
-                    <?php endforeach ?>
-                    <?php endif  ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php endif  ?>
                     <?php endif ?>
                 </tbody>
             </table>
@@ -92,17 +95,18 @@
 
     </div> <!-- /#list -->
 
-
+                    
     <?php if (  isset($pager)  ) : ?>
-    <div id="bottom" class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <?= $pager->links() ?>
-            </ul>
-        </div>
-    </div> <!-- /#bottom -->
+        <div id="bottom" class="row">
+            <div class="col-md-12">
+                <ul class="pagination">
+                    <?= $pager->links() ?>
+                </ul>
+            </div>
+        </div> <!-- /#bottom -->
     <?php endif; ?>
-
+  
+<!-- Modal -->
     <!--<div id="bottom" class="row">
 		<div class="col-md-12">
 			<ul class="pagination">
@@ -115,7 +119,7 @@
 	</div> 
  </div>   -->
 
-    <!-- Modal -->
+  
     <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
 
         <div class="modal-dialog" role="document">

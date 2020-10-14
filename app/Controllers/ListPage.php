@@ -47,7 +47,6 @@ class ListPage extends BaseController
 		];
 
 		// RENDER 
-		echo "index";
 		echo view ("templates/header");
 		return view("pages/list/list" , $data  );
 	}
