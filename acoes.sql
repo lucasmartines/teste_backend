@@ -14,4 +14,4 @@ CREATE TABLE user (
 
 INSERT INTO user  
 (  nome , sobre_nome , senha , nascimento ,email) VALUES
-( 'teste' ,'teste sobrenome' ,  '123456' , '10-10-2000' , ' teste@plyn.com.br' );
+( 'teste' ,'teste sobrenome' ,  'teste' , '2000-10-10' , ' teste@plyn.com.br' );
