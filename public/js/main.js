@@ -1,4 +1,5 @@
-var url = window.location.origin //+ "/apps/teste/public"
+//var url = window.location.origin //+ "/apps/teste/public"
+var url = window.location.origin + "/teste/public"
 
 
 

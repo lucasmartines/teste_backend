@@ -3,7 +3,9 @@
 
 let itemToDelete = -1;
 
-
+if(!url){
+    throw new Exception("arquivo main não fo carregado, por favor carregue o arquivo main.js antes desse arquivo")
+}
 
 
 $(".delete_button").click( function(e){

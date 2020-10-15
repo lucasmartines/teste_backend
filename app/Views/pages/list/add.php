@@ -10,16 +10,18 @@
 			</div>
 		<?php endif?>
 
-        <?php if( isset( $validation) ): ?>
-            <div class="alert alert-danger">	
-				<?php echo $validation->listErrors() ?>
-			</div>
-        <?php endif ?>
+        <?php // if( isset( $validation) ): ?>
+            <!-- <div class="alert alert-danger">	
+				<?php // echo $validation->listErrors() ?>
+			</div> -->
+        <?php // endif ?>
         
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nome">Nome</label>
                 <input value="<?php echo set_value("nome")?>" required  name="nome" type="text" class="form-control" id="nome" placeholder="Digite o valor">
+                <span class="text-danger"> 
+                    <?php if( isset( $validation) ){ echo $validation->getError('nome'); } ?> </span>
             </div>
         </div>
 
@@ -27,9 +29,11 @@
             <div class="form-group col-md-4">
                 <label for="sobre_nome">Sobrenome</label>
                 <input
-                    value="<?php echo set_value("sobre_nome")?>"
-					name="sobre_nome" type="text"
-                    class="form-control" id="sobre_nome" placeholder="Digite o valor">
+                value="<?php echo set_value("sobre_nome")?>"
+                name="sobre_nome" type="text"
+                class="form-control" id="sobre_nome" placeholder="Digite o valor">
+                <span class="text-danger"> 
+                    <?php if( isset( $validation) ){ echo $validation->getError('sobre_nome'); } ?> </span>
             </div>
         </div>
 
@@ -39,6 +43,8 @@
                 <input 
                     value="<?php echo set_value("nascimento")?>"
                     required name="nascimento" type="date" class="form-control" id="nascimento" placeholder="Digite o valor">
+                    <span class="text-danger"> 
+                        <?php if( isset( $validation) ){ echo $validation->getError('nascimento'); } ?> </span>    
             </div>
         </div>
 
@@ -48,6 +54,8 @@
                 <input
                     value="<?php echo set_value("email")?>"
                     required name="email" type="email" class="form-control" id="email" placeholder="Digite o valor">
+                    <span class="text-danger"> 
+                    <?php if( isset( $validation ) ){ echo $validation->getError('email'); } ?> </span>
             </div>
         </div>
 

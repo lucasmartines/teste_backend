@@ -12,11 +12,11 @@
 			</div>
         <?php endif?>
         
-        <?php if( isset( $validation) ): ?>
-            <div class="alert alert-danger">	
-				<?php echo $validation->listErrors() ?>
-			</div>
-        <?php endif ?>
+        <?php // if( isset( $validation) ): ?>
+            <!-- <div class="alert alert-danger">	 -->
+				<?php // echo $validation->listErrors() ?>
+			<!-- </div> -->
+        <?php // endif ?>
             
         <div class="row">
 
@@ -24,7 +24,10 @@
                 <label for="nome">Nome</label>
 				<input 
 					value="<?= $user["nome"] ?>"
-					name="nome" type="text" class="form-control" id="nome" placeholder="Digite o valor">
+                    name="nome" type="text" class="form-control" id="nome" placeholder="Digite o valor">
+                    <span class="text-danger"> 
+                        <?php if( isset( $validation) ){ echo $validation->getError('nome'); } ?> 
+                    </span>
             </div>
         </div>
 
@@ -33,7 +36,10 @@
                 <label for="sobre_nome">Sobrenome</label>
 				<input 
 					value="<?= $user["sobre_nome"] ?>"	
-					name="sobre_nome" type="text"class="form-control" id="sobre_nome" placeholder="Digite o valor">
+                    name="sobre_nome" type="text"class="form-control" id="sobre_nome" placeholder="Digite o valor">
+                    <span class="text-danger"> 
+                        <?php if( isset( $validation) ){ echo $validation->getError('sobre_nome'); } ?> 
+                    </span>
             </div>
         </div>
 
@@ -42,7 +48,10 @@
                 <label for="nascimento">Nascimento</label>
 				<input
 					value="<?= $user["nascimento"] ?>"
-					name="nascimento" type="date" class="form-control" id="nascimento" placeholder="Digite o valor">
+                    name="nascimento" type="date" class="form-control" id="nascimento" placeholder="Digite o valor">
+                    <span class="text-danger"> 
+                        <?php if( isset( $validation) ){ echo $validation->getError('nascimento'); } ?> 
+                    </span>
             </div>
         </div>
 
@@ -51,7 +60,10 @@
                 <label for="email">E-Mail</label>
 				<input 
 					value="<?= $user["email"] ?>"
-					name="email" type="email" class="form-control" id="email" placeholder="Digite o valor">
+                    name="email" type="email" class="form-control" id="email" placeholder="Digite o valor">
+                    <span class="text-danger"> 
+                        <?php if( isset( $validation) ){ echo $validation->getError('email'); } ?> 
+                    </span>
             </div>
         </div>
 

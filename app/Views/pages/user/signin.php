@@ -49,7 +49,7 @@
             <?php if(  session()->getFlashdata("user_dont_exists_message" )  ):?>
                        
                 <div class="alert alert-danger">
-                    <?php echo session()->getFlashdata("user_deleted_success") ;?>
+                    <?php echo session()->getFlashdata("user_dont_exists_message") ;?>
                 </div>
                
             <?php endif?>

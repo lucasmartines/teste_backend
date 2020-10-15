@@ -60,7 +60,7 @@ class ListPage extends BaseController
 
 		if( $this->request->getMethod() === "post" )
 		{
-			if(!$this->validate( $this->validateRulesCreateUser() )){
+			if(!$this->validate( $this->validateRulesCreateUser() , $this->errorsMessages()  )){
 				
 				$data["validation"] = $this->validator;
 				//$data["validation"] =  \Config\Services::validation();
@@ -99,7 +99,7 @@ class ListPage extends BaseController
 
 		if( $this->request->getMethod() === "post" )		
 		{
-			if(!$this->validate( $this->validateRulesUpdateUser() )){
+			if(!$this->validate( $this->validateRulesUpdateUser()  , $this->errorsMessages()  )){
 				$data["validation"] = $this->validator;
 			}
 			else
@@ -152,12 +152,32 @@ class ListPage extends BaseController
 	}
 
 
-	
+	private function errorsMessages(){
+		return [
+			'nome' => [
+				'required' => "O nome do usuário é obrigatório" ,
+				'min_length' => "O minimo necessário é 5 caracteres" ,
+				'max_length' => "O máximo permitido é 255 caracteres" ,
+			] ,
+			'sobre_nome' => [
+				'required' => "O sobrenome do usuário é obrigatório" ,
+				'max_length' => "O máximo permitido é 255 caracteres" ,
+			],
+			'nascimento'=>[
+				'required' => "A data de nascimento do usuário é obrigatório" ,
+			],
+			'email' => [
+				'required' => "O email é obrigatório",
+				'valid_email' => "Atenção o email é inválido",
+				'is_unique' => "Atenção já existe alguem com esse email cadastrado, por favor selecione outro!",
+			]
+		];
+	}
 
 	private function validateRulesCreateUser(){
 		return [
 			'nome' => 'required|min_length[5]|max_length[254]',
-			'sobre_nome'  => 'required',
+			'sobre_nome'  => 'required|max_length[254]',
 			'nascimento'  => 'required',
 			'email'  => 'required|valid_email|is_unique[user.email]',
 		];
