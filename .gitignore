@@ -9,6 +9,7 @@
 
 # OS X Thumbnails
 ._*
+.access
 
 # Windows image file caches
 Thumbs.db
@@ -41,7 +42,7 @@ $RECYCLE.BIN/
 #-------------------------
 # These should never be under version control,
 # as it poses a security risk.
-.env
+
 .vagrant
 Vagrantfile
 

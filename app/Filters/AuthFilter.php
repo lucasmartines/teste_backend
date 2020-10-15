@@ -9,7 +9,7 @@ class AuthFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if(!session()->get("isLogged")){
-             return redirect()->to("/");
+             return redirect()->to( site_url() );
         }
     }
 

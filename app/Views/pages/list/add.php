@@ -2,7 +2,7 @@
 
     <h3 class="page-header">Adicionar Item</h3>
 
-    <form action="<?php echo site_url() ?>list/create" method="post">
+    <form action="<?php echo site_url("list/create") ?>" method="post">
             
 		<?php if(  session()->getFlashdata("saved_item_message" )  ):?>
 			<div class="alert alert-success">	
@@ -19,15 +19,16 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nome">Nome</label>
-                <input required  name="nome" type="text" class="form-control" id="nome" placeholder="Digite o valor">
+                <input value="<?php echo set_value("nome")?>" required  name="nome" type="text" class="form-control" id="nome" placeholder="Digite o valor">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="sobre_nome">Sobrenome</label>
-				<input
-					 name="sobre_nome" type="text"
+                <input
+                    value="<?php echo set_value("sobre_nome")?>"
+					name="sobre_nome" type="text"
                     class="form-control" id="sobre_nome" placeholder="Digite o valor">
             </div>
         </div>
@@ -35,14 +36,18 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nascimento">Nascimento</label>
-                <input required name="nascimento" type="date" class="form-control" id="nascimento" placeholder="Digite o valor">
+                <input 
+                    value="<?php echo set_value("nascimento")?>"
+                    required name="nascimento" type="date" class="form-control" id="nascimento" placeholder="Digite o valor">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-3">
                 <label for="email">E-Mail</label>
-                <input required name="email" type="email" class="form-control" id="email" placeholder="Digite o valor">
+                <input
+                    value="<?php echo set_value("email")?>"
+                    required name="email" type="email" class="form-control" id="email" placeholder="Digite o valor">
             </div>
         </div>
 

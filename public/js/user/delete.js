@@ -1,5 +1,10 @@
 
+/** this script need to be loaded after main */
+
 let itemToDelete = -1;
+
+
+
 
 $(".delete_button").click( function(e){
     e.preventDefault();
@@ -8,7 +13,7 @@ $(".delete_button").click( function(e){
     
     itemToDelete = id;
 
-    $("#form_delete_user").attr("action","/list/"+id+"/delete")
+    $("#form_delete_user").attr("action", url + "/list/"+id+"/delete")
 
 
 })

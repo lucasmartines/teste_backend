@@ -10,7 +10,7 @@ class NoAuthFilter implements FilterInterface
     {
         if( session()->get( "isLogged" ) ){
 
-             return redirect()->to("/list");
+             return redirect()->to(  site_url("list")  );
         }
     }
 

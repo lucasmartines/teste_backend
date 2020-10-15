@@ -11,7 +11,7 @@ class UserPage extends BaseController
 
 		session()->destroy();
 
-		return redirect()->to("/list");
+		return redirect()->to( site_url("list"));
 	}
 	public function index(  )
 	{
@@ -43,7 +43,7 @@ class UserPage extends BaseController
 							'isLogged' => true
 						]);
 
-						return redirect()->to("list");
+						return redirect()->to( site_url( "list" ) );
 						
 					}else{
 						

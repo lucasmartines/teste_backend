@@ -9,7 +9,7 @@ class ListPage extends BaseController
 
 	public function __construct()
 	{
-		helper("url");
+		helper(["url","form"]);
 	}
 
 	/** Search View */
@@ -17,7 +17,7 @@ class ListPage extends BaseController
 	{
 
 		if(! $this->request->getVar("search") ) {
-			return redirect()->to("/list");
+			return redirect()->to( site_url("list"));
 		}
 
 
@@ -61,7 +61,14 @@ class ListPage extends BaseController
 		if( $this->request->getMethod() === "post" )
 		{
 			if(!$this->validate( $this->validateRulesCreateUser() )){
+				
 				$data["validation"] = $this->validator;
+				//$data["validation"] =  \Config\Services::validation();
+				
+				echo view ("templates/header");
+				echo view("pages/list/add" ,$data );
+				return ;
+				
 			}else
 			{
 				$data = $this->getRequestData();		 
@@ -74,7 +81,7 @@ class ListPage extends BaseController
 			// echo view ("templates/header");
 			// echo view("pages/list/list" ,$data );
 
-			return redirect()->to("/list");
+			return redirect()->to( site_url("list") );
 		}
 
 		echo view ("templates/header");
@@ -136,15 +143,16 @@ class ListPage extends BaseController
     public function delete( $id  )
 	{
 
-		echo $id . " deleted";
 		$userModer = new User();
 
 		$userModer->delete($id);
 		session()->setFlashData("user_deleted_success","Usuáro fo deletado com sucesso!");
 
-		echo view ("templates/header");
-		return redirect()->to("/list");
+		return redirect()->to( site_url("list") );
 	}
+
+
+	
 
 	private function validateRulesCreateUser(){
 		return [
