@@ -13,7 +13,7 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo site_url() ?>dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo site_url() ?>css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="<?php echo site_url() ?>assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
